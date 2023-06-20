@@ -20,9 +20,9 @@ public class Sistema_principal {
 			estoque.adicionarEstoque(pao2, 30);
 			estoque.adicionarEstoque(pao3, 25);
 			
-		Produto bolo1 = new Bolo(" - Bolo de Chocolate - ", 4, 16.0, "Chocolate");
-		Produto bolo2 = new Bolo(" - Bolo de Morango - ", 5, 14.0, "Morango");
-		Produto bolo3 = new Bolo(" - Bolo de Cenoura - ", 6, 12.0, "Cenoura");
+		Produto bolo1 = new Bolo(" - Bolo de Chocolate - ", 4, 16.00, "Chocolate");
+		Produto bolo2 = new Bolo(" - Bolo de Morango - ", 5, 14.00, "Morango");
+		Produto bolo3 = new Bolo(" - Bolo de Cenoura - ", 6, 12.00, "Cenoura");
 			cadastro.cadastrarProduto(bolo1);
 			cadastro.cadastrarProduto(bolo2);
 			cadastro.cadastrarProduto(bolo3);
@@ -31,9 +31,9 @@ public class Sistema_principal {
 			estoque.adicionarEstoque(bolo2, 15);
 			estoque.adicionarEstoque(bolo3, 20);
 			
-		Produto biscoito1 = new Biscoito(" - Biscoito de Chocolate - ", 7, 3.0, "Chocolate");
-		Produto biscoito2 = new Biscoito(" - Biscoito de Baunilha - ", 8, 3.5, "Baunilha");
-		Produto biscoito3 = new Biscoito(" - Biscoito de Morango - ", 9, 3.0, "Morango");
+		Produto biscoito1 = new Biscoito(" - Biscoito de Chocolate - ", 7, 3.00, "Chocolate");
+		Produto biscoito2 = new Biscoito(" - Biscoito de Baunilha - ", 8, 3.50, "Baunilha");
+		Produto biscoito3 = new Biscoito(" - Biscoito de Morango - ", 9, 3.00, "Morango");
 			cadastro.cadastrarProduto(biscoito1);
 			cadastro.cadastrarProduto(biscoito2);
 			cadastro.cadastrarProduto(biscoito3);
@@ -45,29 +45,38 @@ public class Sistema_principal {
 			// CRIACAO DO OBJETO FATURA
 			Fatura fatura = new Fatura();
 			
+			// VARIAVEIS PARA EXIBIR FATURA
+			StringBuilder carrinho = new StringBuilder();
+						
 			// LOOP PRINCIPAL DO PROGRAMA 
 			
 			boolean encerrar = false;
 			do { // EXIBIR OPÇÕES PARA O USUÁRIO
-				String opcao = JOptionPane.showInputDialog("Escolha uma opção:\n1. Comprar produto\n2. Encerrar programa");
+				String opcao = JOptionPane.showInputDialog("Escolha uma opção:\n\n1. Comprar produto\n\n2. "
+						+ "Encerrar programa\n\n3. Ver carrinho de compras\n\n4. Remover produto do carrinho\n\n");
 				
 				// VERIFICAR A OPÇÃO ESCOLHIDA
 				switch (opcao) {
 					case "1": // EXIBIR LISTA DE PRODUTOS
-						String listaProdutos = "Produtos disponíveis: \n\n"; listaProdutos += "Código\tProduto\tPreço\n"; listaProdutos += "-------------\n";
-				listaProdutos+= pao1.getCodigo() + "\t" + pao1.getNome() + "\t" + pao1.getPreco() + "\n";
-				listaProdutos+=	pao2.getCodigo() + "\t" + pao2.getNome() + "\t" + pao2.getPreco() + "\n";
-				listaProdutos+= pao3.getCodigo() + "\t" + pao3.getNome() + "\t" + pao3.getPreco() + "\n";
+						
+						String listaProdutos = "Produtos disponíveis: \n\n"; listaProdutos += "Código  |  Produto  |  Preço\n"; listaProdutos += 
+						"------------------------------------------------------\n\n";
+						
+				listaProdutos+= pao1.getCodigo() + "\t" + pao1.getNome() + "\t" + " R$ " + pao1.getPreco() + "\n";
+				listaProdutos+=	pao2.getCodigo() + "\t" + pao2.getNome() + "\t" + " R$ " + pao2.getPreco() + "\n";
+				listaProdutos+= pao3.getCodigo() + "\t" + pao3.getNome() + "\t" + " R$ " + pao3.getPreco() + "\n";
 				
-				listaProdutos+= bolo1.getCodigo() + "\t" + bolo1.getNome() + "\t" + bolo1.getPreco() + "\n";
-				listaProdutos+= bolo2.getCodigo() + "\t" + bolo2.getNome() + "\t" + bolo2.getPreco() + "\n";
-				listaProdutos+= bolo3.getCodigo() + "\t" + bolo3.getNome() + "\t" + bolo3.getPreco() + "\n";
+				listaProdutos+= bolo1.getCodigo() + "\t" + bolo1.getNome() + "\t" + " R$ " + bolo1.getPreco() + "\n";
+				listaProdutos+= bolo2.getCodigo() + "\t" + bolo2.getNome() + "\t" + " R$ " + bolo2.getPreco() + "\n";
+				listaProdutos+= bolo3.getCodigo() + "\t" + bolo3.getNome() + "\t" + " R$ " + bolo3.getPreco() + "\n";
 				
-				listaProdutos+= biscoito1.getCodigo() + "\t" + biscoito1.getNome() + "\t" + biscoito1.getPreco() + "\n";
-				listaProdutos+= biscoito2.getCodigo() + "\t" + biscoito2.getNome() + "\t" + biscoito2.getPreco() + "\n";
-				listaProdutos+= biscoito3.getCodigo() + "\t" + biscoito3.getNome() + "\t" + biscoito3.getPreco() + "\n";
+				listaProdutos+= biscoito1.getCodigo() + "\t" + biscoito1.getNome() + "\t" + " R$ " + biscoito1.getPreco() + "\n";
+				listaProdutos+= biscoito2.getCodigo() + "\t" + biscoito2.getNome() + "\t" + " R$ " + biscoito2.getPreco() + "\n";
+				listaProdutos+= biscoito3.getCodigo() + "\t" + biscoito3.getNome() + "\t" + " R$ " + biscoito3.getPreco() + "\n";
 				
-				String codigoProduto = JOptionPane.showInputDialog(listaProdutos + "\nDigite o código do produto que deseja comprar: ");
+				///// SOLICITAR CODIGO DO PRODUTO 
+				
+				String codigoProduto = JOptionPane.showInputDialog(listaProdutos + "\nDigite o código do produto que deseja comprar:_____  \n\n");
 				
 				if (codigoProduto.equals("0")) {
                     // Encerrar compra e exibir fatura final
@@ -106,35 +115,55 @@ public class Sistema_principal {
 							break;
 							
 								default: 
-									JOptionPane.showMessageDialog(null, "Código inválido");
+									JOptionPane.showMessageDialog(null, "Código inválido\n\n");
 								continue; // VOLTA PARA O INICIO DO PROGRAMA
 					} 
 					// SOLICITAR A QUANTIDADE DESEJADA
-					String quantidadeString = JOptionPane.showInputDialog("Digite a quantidade desejada: ");
+					String quantidadeString = JOptionPane.showInputDialog("\nDigite a quantidade desejada:_____ \n\n");
 					int quantidade = Integer.parseInt(quantidadeString);
 					// VERIFICAR SE TEM ESTOQUE
 					int quantidadeEstoque = estoque.getQuantidadeEstoque(produtoEscolhido);
-						if (quantidadeEstoque >= quantidade) {
+						if (quantidadeEstoque >= quantidade) {							
 							
-							// CALCULAR O VALOR DA COMPRA
-							// double valorCompra = produtoEscolhido.getPreco() * quantidade;
+							
 							
 							// ATUALIZAR O ESTOQUE 
 							estoque.removerEstoque(produtoEscolhido, quantidade);
 							
-							// ADICIONAR PRODUTO A FATURA
-							fatura.adicionarProduto(produtoEscolhido, quantidade);
-							JOptionPane.showMessageDialog(null, "Produto adicionado a fatura!");
+							carrinho.append(produtoEscolhido.getCodigo() + "  -  " + quantidade + "x " + produtoEscolhido.getNome() + "  R$  " +
+									produtoEscolhido.getPreco() + "  =  " + "  R4$  " + produtoEscolhido.getPreco() * quantidade + "\n");	
+							
+							
+							JOptionPane.showMessageDialog(null, "\nProduto adicionado ao CARRINHO!\n");
 						} else {
-							JOptionPane.showMessageDialog(null, "Quantidade insuficiente em estoque!");
+							JOptionPane.showMessageDialog(null, "Quantidade insuficiente em estoque!\n");
 						} break;
 							
 					case "2":
 						encerrar = true;
 						break;
-						default: 
-							JOptionPane.showMessageDialog(null, "Opção invalida!");
+					
+					case "3":
+						//// EXIBIR CARRINHO DE COMPRAS
 						
+						double valorTotal = fatura.calcularTotal();
+						carrinho.append("\nValor total do Carrinho: R$ " + valorTotal + "\n\n");
+						carrinho.append(fatura.toString());
+						JOptionPane.showMessageDialog(null, carrinho.toString());
+						break;
+						
+					case "4": // Remover produto do carrinho
+						
+					    
+						carrinho.append(fatura.toString());
+					    JOptionPane.showMessageDialog(null, carrinho.toString());
+					    int codigoItem = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do item a ser removido: "));
+					    fatura.removerItem(codigoItem);
+					    break;
+
+						default: 
+							JOptionPane.showMessageDialog(null, "Opção invalida!");	
+							break;
 				} 
 			
 			
@@ -142,7 +171,7 @@ public class Sistema_principal {
 					
 		/// EXIBIR FATURA FINAL
 			double valorTotal = fatura.calcularTotal();
-	        JOptionPane.showMessageDialog(null, "Fatura final:\n\n" + fatura.toString() + "\nValor Total: R$" + valorTotal);
+	        JOptionPane.showMessageDialog(null, "Valor total do Carrinho: R$" + valorTotal + "\n\n");
 
 	    // Encerrar o programa
 	        JOptionPane.showMessageDialog(null, "Programa encerrado.");
